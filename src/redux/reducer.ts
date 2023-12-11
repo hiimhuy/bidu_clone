@@ -2,11 +2,11 @@ import {
   FETCH_NEWEST_PRODUCT_REQUEST,
   FETCH_NEWEST_PRODUCT_SUCCESS,
   FETCH_NEWEST_PRODUCT_FAILURE,
-  ProductActionTypes,
-} from "../redux/action";
+} from "../type";
+import { ProductActionTypes } from "./action";
 
 interface ProductState {
-  data: any | null; // Type your data appropriately
+  data: any | null; // Loại dữ liệu phải được chỉ định phù hợp
   loading: boolean;
   error: string | null;
 }

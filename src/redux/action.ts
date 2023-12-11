@@ -1,9 +1,11 @@
 import { Dispatch } from "redux";
 import axiosClient from "../api/axiosClient";
-
-export const FETCH_NEWEST_PRODUCT_REQUEST = "FETCH_NEWEST_PRODUCT_REQUEST";
-export const FETCH_NEWEST_PRODUCT_SUCCESS = "FETCH_NEWEST_PRODUCT_SUCCESS";
-export const FETCH_NEWEST_PRODUCT_FAILURE = "FETCH_NEWEST_PRODUCT_FAILURE";
+import {
+  FETCH_NEWEST_PRODUCT_FAILURE,
+  FETCH_NEWEST_PRODUCT_REQUEST,
+  FETCH_NEWEST_PRODUCT_SUCCESS,
+} from "../type";
+import { RootState } from "./index";
 
 interface FetchNewestProductRequestAction {
   type: typeof FETCH_NEWEST_PRODUCT_REQUEST;
@@ -11,7 +13,7 @@ interface FetchNewestProductRequestAction {
 
 interface FetchNewestProductSuccessAction {
   type: typeof FETCH_NEWEST_PRODUCT_SUCCESS;
-  payload: any; // Type your data appropriately
+  payload: any;
 }
 
 interface FetchNewestProductFailureAction {
@@ -25,7 +27,7 @@ export type ProductActionTypes =
   | FetchNewestProductFailureAction;
 
 export const fetchNewestProduct =
-  () => async (dispatch: Dispatch<ProductActionTypes>) => {
+  (): any => async (dispatch: Dispatch<ProductActionTypes>) => {
     dispatch({ type: FETCH_NEWEST_PRODUCT_REQUEST });
 
     try {
@@ -33,12 +35,10 @@ export const fetchNewestProduct =
         "api/v2/mobile/home/newest-product"
       );
       dispatch({ type: FETCH_NEWEST_PRODUCT_SUCCESS, payload: response.data });
-    } catch (error) {
+    } catch (error: any) {
       dispatch({ type: FETCH_NEWEST_PRODUCT_FAILURE, payload: error.message });
     }
-  };
-
-// const [data, setData] = useState(null);
+  }; // const [data, setData] = useState(null);
 
 // useEffect(() => {
 //   const fetchData = async () => {
