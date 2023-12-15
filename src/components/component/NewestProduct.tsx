@@ -3,11 +3,14 @@ import {
   FaAngleDown,
   FaArrowLeftLong,
   FaArrowRightLong,
+  FaLocationDot,
 } from "react-icons/fa6";
-import axiosClient from "../api/axiosClient";
 import { BiBookmark } from "react-icons/bi";
 import Image from "next/image";
 import Slider from "react-slick";
+import axiosClient from "@/src/api/axiosClient";
+import { homeActions } from "@/src/store/home/homeSlice";
+import { useDispatch } from "react-redux";
 
 interface Product {
   _id: string;
@@ -35,6 +38,10 @@ interface NewestProduct {
 }
 
 const NewestProduct = ({ data }: any) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(homeActions.getList());
+  }, []);
   const [newestProductData, setNewestProductData] =
     useState<NewestProduct | null>(null);
   const [showNextButton, setShowNextButton] = useState(true);
@@ -83,58 +90,60 @@ const NewestProduct = ({ data }: any) => {
   }, []);
 
   return (
-    <div className="px-44">
+    <div className="px-44 pt-8 pb-6">
       <div className="flex justify-between">
-        <h2>Sản Phẩm Mới Nhất</h2>
-        <div className="flex">
+        <h2 className="font-bold text-2xl ">Sản Phẩm Mới Nhất</h2>
+        <div className="flex  text-sm font-medium">
           Xem tất cả
           <FaAngleDown />
         </div>
       </div>
 
-      <div className="relative ">
+      <div className="relative pt-6">
         <Slider {...settings} ref={sliderRef}>
           {newestProductData?.data.map((product) => (
             <div
               key={product._id}
-              className="flex items-center justify-center w-[178px] h-[389px] object-cover"
+              className="flex flex-col justify-center items-center w-[162px] h-[356px] gap-2 px-3 hover:shadow-md hover:rounded-md cursor-pointer"
             >
-              <div className="relative w-[162px] h-[249px] object-cover gap-4">
-                <BiBookmark className="absolute top-2 right-4 z-50 text-white cursor-pointer" />
+              <div className="relative flex flex-col w-[162px] h-[249px] gap-1">
+                <BiBookmark className="absolute top-2 right-2 z-50 text-white text-3xl cursor-pointer" />
                 <Image
                   src={product.images[0]}
                   alt={product.name}
-                  height={249}
-                  width={162}
-                  className="object-cover rounded-md"
+                  fill
+                  sizes="(width:162px), (height:249px)"
+                  className="object-cover rounded-md mt-2"
                 />
               </div>
-              <div>
-                <p>
-                  {product.sale_price} <u>đ</u>
+              <div className="pt-3">
+                <p className="flex font-bold">
+                  {product.sale_price} <u className="text-xs p-[3px] ">đ</u>
                 </p>
-                <p>{product.name}</p>
-                <p>{product.shop.country}</p>
+                <p className="text-sm font-extralight">{product.name}</p>
+                <div className="flex items-center">
+                  <FaLocationDot className="text-[8px] text-gray-400" />
+                  <p className="text-[#191919] font-light text-[10px]">
+                    {product.shop.country}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
         </Slider>
         <div>
-          {showNextButton ? (
-            <div
-              className="flex items-center justify-center w-9 h-9 absolute right-0 top-[15%] bg-white  cursor-pointer rounded-full shadow-md z-50"
-              onClick={btnNext}
-            >
-              <FaArrowRightLong />
-            </div>
-          ) : (
-            <div
-              className="flex items-center justify-center w-9 h-9 absolute left-0 top-[15%] bg-white  cursor-pointer rounded-full shadow-md z-50"
-              onClick={btnPrev}
-            >
-              <FaArrowLeftLong />
-            </div>
-          )}
+          <div
+            className="flex items-center justify-center w-9 h-9 absolute right-0 top-[35%] bg-white cursor-pointer rounded-full shadow-lg z-50"
+            onClick={btnNext}
+          >
+            <FaArrowRightLong />
+          </div>
+          <div
+            className="flex items-center justify-center w-9 h-9 absolute left-0 top-[35%] bg-white  cursor-pointer rounded-full shadow-md z-50"
+            onClick={btnPrev}
+          >
+            <FaArrowLeftLong />
+          </div>
         </div>
       </div>
     </div>

@@ -5,7 +5,13 @@ import { LuSearch } from "react-icons/lu";
 const Navbar = () => {
   return (
     <div className="flex items-center px-44 h-[93px] justify-between border-b">
-      <Image src={"/img_bidu/logo.png"} alt="logo" width={93} height={35} />
+      <Image
+        src={"/img_bidu/logo.png"}
+        alt="logo"
+        width={93}
+        height={35}
+        priority
+      />
       <div className="flex justify-between border-[1px] border-black w-[444px] h-[44px] px-[20px] rounded-full">
         <input
           className="w-full focus:outline-none text-sm font-semibold"

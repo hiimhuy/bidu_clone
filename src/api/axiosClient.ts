@@ -1,5 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { url } from "inspector";
+import axios from "axios";
 
 const URL_API = process.env.NEXT_PUBLIC_BASE_API_URL;
 console.log(process);

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
-import axiosClient from "../api/axiosClient";
+import axiosClient from "../../api/axiosClient";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import Slider from "react-slick";
 
@@ -120,7 +120,13 @@ const Banner = () => {
               className="flex flex-col justify-center items-center "
             >
               <div className="flex flex-col items-center justify-center h-[80px] gap-1">
-                <Image src={item.avatar} alt="avatar" width={28} height={28} />
+                <Image
+                  src={item.avatar}
+                  alt="avatar"
+                  width={28}
+                  height={28}
+                  priority={false}
+                />
                 <div className="font-medium text-sm">{item.name}</div>
               </div>
             </div>
