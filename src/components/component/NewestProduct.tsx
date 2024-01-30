@@ -11,37 +11,11 @@ import Slider from "react-slick";
 import axiosClient from "@/src/api/axiosClient";
 import { homeActions } from "@/src/store/home/homeSlice";
 import { useDispatch } from "react-redux";
-
-interface Product {
-  _id: string;
-  name: string;
-  images: string[];
-  before_saleprice: string;
-  bidu_air: boolean;
-  discount_percent: number;
-  sale_price: string;
-  shop: {
-    country: string;
-  };
-}
-
-interface NewestProduct {
-  success: boolean;
-  message: string;
-  data: Product[];
-  paginate: {
-    limit: number;
-    page: number;
-    total_page: number;
-    total_record: number;
-  };
-}
+import { NewestProduct } from "@/src/model/type";
 
 const NewestProduct = ({ data }: any) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(homeActions.getList());
-  }, []);
+
   const [newestProductData, setNewestProductData] =
     useState<NewestProduct | null>(null);
   const [showNextButton, setShowNextButton] = useState(true);
@@ -72,8 +46,9 @@ const NewestProduct = ({ data }: any) => {
       try {
         const response = await axiosClient.get<NewestProduct>(
           "api/v2/mobile/home/newest-product"
+          // "api/v1/user/all"
         );
-        console.log(response.data);
+        // console.log(response.data);
         setNewestProductData(response.data);
       } catch (error) {
         console.log("Error fetching data:", error);

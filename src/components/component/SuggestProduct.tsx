@@ -4,19 +4,7 @@ import { CiBookmark } from "react-icons/ci";
 import Image from "next/image";
 import { FaAngleDown } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-
-interface SuggestProduct {
-  success: boolean;
-  message: string;
-  data: {
-    before_sale_price: number;
-    images: string[];
-    name: string;
-    _id: string;
-    bidu_air: null;
-    sale_price: number;
-  }[];
-}
+import { SuggestProduct } from "@/src/model/type";
 
 const SuggestProduct = () => {
   const [suggestProduct, setSuggestProduct] = useState<SuggestProduct | null>(

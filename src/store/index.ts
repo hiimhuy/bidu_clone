@@ -6,10 +6,10 @@ import {
 } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSaga";
-// import { authReducer } from '@/store/auth/authSlice';
+import { homeReducer } from "./home/homeSlice";
 
 const reducers = combineReducers({
-  //   auth: authReducer,
+  home: homeReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

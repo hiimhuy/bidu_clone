@@ -1,8 +1,15 @@
-import { all, fork, put, takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 import { homeActions } from "./homeSlice";
+import bannerApi from "@/src/api/bannerApi";
+import { Banners } from "@/src/declares/models/home/Banners";
 
 function* getBanners() {
-  console.log("getBanners");
+  try {
+    const response: Banners = yield call(bannerApi.fetchList);
+    yield put(homeActions.getListSuccess(response));
+  } catch (error) {
+    yield put(homeActions.getListFailed);
+  }
 
   //   try {
   //     const response: any = "user";
@@ -11,6 +18,12 @@ function* getBanners() {
   //     yield put(authActions.loginFailed("Fail"));
   //   }
 }
+
+// function* getCategories(){
+//   try{
+
+//   }
+// }
 
 function* watchHomeFlow() {
   yield all([takeLatest(homeActions.getList.type, getBanners)]);
