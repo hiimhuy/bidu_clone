@@ -1,18 +1,38 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
-export interface Banner {
+// responseHome
+export interface Banners {
   data: {
-    system_banner: {
-      image: string;
-      promo_link: string;
-    }[];
-    system_category: {
-      name: string;
-      avatar: string;
-    }[];
+    data: {
+      system_banner: {
+        _id: string;
+        name: string;
+        image: string;
+      }[];
+      system_category: {
+        _id: string;
+        name: string;
+        avatar: string;
+        priority: number;
+        type: string;
+      }[];
+    };
   };
 }
 
+export interface Banner {
+  image: string;
+}
+
+export interface Categories {
+  system_category: {
+    _id: string;
+    name: string;
+    avatar: string;
+  }[];
+}
+
+export interface NewestProduct {
+  data: Product[];
+}
 interface Product {
   _id: string;
   name: string;
@@ -23,18 +43,6 @@ interface Product {
   sale_price: string;
   shop: {
     country: string;
-  };
-}
-
-export interface NewestProduct {
-  success: boolean;
-  message: string;
-  data: Product[];
-  paginate: {
-    limit: number;
-    page: number;
-    total_page: number;
-    total_record: number;
   };
 }
 
@@ -65,9 +73,9 @@ export interface TopSeller {
     name: string;
     system_banner: {
       images: {
-        en?: string | StaticImport | undefined;
-        ko?: string | StaticImport | undefined;
-        vi?: string | StaticImport | undefined;
+        vi?: string;
+        en?: string;
+        ko?: string;
       };
       name: string;
     };

@@ -12,19 +12,23 @@ import axiosClient from "@/src/api/axiosClient";
 import { homeActions } from "@/src/store/home/homeSlice";
 import { useDispatch } from "react-redux";
 import { NewestProduct } from "@/src/model/type";
+import { useAppSelector } from "@/src/store/hook";
 
-const NewestProduct = ({ data }: any) => {
+const NewestProduct = () => {
   const dispatch = useDispatch();
 
-  const [newestProductData, setNewestProductData] =
-    useState<NewestProduct | null>(null);
+  const NewestProduct: NewestProduct = useAppSelector(
+    (state) => state.home.newest_products
+  );
+
+  useEffect(() => {
+    dispatch(homeActions.getListNewestProduct());
+  }, []);
+
   const [showNextButton, setShowNextButton] = useState(true);
   const sliderRef = useRef(null);
 
   var settings = {
-    // dots: true,
-    // infinite: true,
-    // speed: 500,
     slidesToShow: 6,
     slidesToScroll: 6,
   };
@@ -41,34 +45,11 @@ const NewestProduct = ({ data }: any) => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosClient.get<NewestProduct>(
-          "api/v2/mobile/home/newest-product"
-          // "api/v1/user/all"
-        );
-        // console.log(response.data);
-        setNewestProductData(response.data);
-      } catch (error) {
-        console.log("Error fetching data:", error);
-        setNewestProductData({
-          success: false,
-          message: "Error fetching data",
-          data: [],
-          paginate: { limit: 0, page: 0, total_page: 0, total_record: 0 },
-        });
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <div className="px-44 pt-8 pb-6">
       <div className="flex justify-between">
         <h2 className="font-bold text-2xl ">Sản Phẩm Mới Nhất</h2>
-        <div className="flex  text-sm font-medium">
+        <div className="flex  text-sm font-medium items-center">
           Xem tất cả
           <FaAngleDown />
         </div>
@@ -76,35 +57,36 @@ const NewestProduct = ({ data }: any) => {
 
       <div className="relative pt-6">
         <Slider {...settings} ref={sliderRef}>
-          {newestProductData?.data.map((product) => (
-            <div
-              key={product._id}
-              className="flex flex-col justify-center items-center w-[162px] h-[356px] gap-2 px-3 hover:shadow-md hover:rounded-md cursor-pointer"
-            >
-              <div className="relative flex flex-col w-[162px] h-[249px] gap-1">
-                <BiBookmark className="absolute top-2 right-2 z-50 text-white text-3xl cursor-pointer" />
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  fill
-                  sizes="(width:162px), (height:249px)"
-                  className="object-cover rounded-md mt-2"
-                />
-              </div>
-              <div className="pt-3">
-                <p className="flex font-bold">
-                  {product.sale_price} <u className="text-xs p-[3px] ">đ</u>
-                </p>
-                <p className="text-sm font-extralight">{product.name}</p>
-                <div className="flex items-center">
-                  <FaLocationDot className="text-[8px] text-gray-400" />
-                  <p className="text-[#191919] font-light text-[10px]">
-                    {product.shop.country}
+          {NewestProduct &&
+            NewestProduct.data?.map((product) => (
+              <div
+                key={product._id}
+                className="flex flex-col justify-center items-center w-[162px] h-[356px] gap-2 px-3 hover:shadow-md hover:rounded-md cursor-pointer"
+              >
+                <div className="relative flex flex-col w-[162px] h-[249px] gap-1">
+                  <BiBookmark className="absolute top-2 right-2 z-50 text-white text-3xl cursor-pointer" />
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    fill
+                    sizes="(width:162px), (height:249px)"
+                    className="object-cover rounded-md mt-2"
+                  />
+                </div>
+                <div className="pt-3">
+                  <p className="flex font-bold">
+                    {product.sale_price} <u className="text-xs p-[3px] ">đ</u>
                   </p>
+                  <p className="text-sm font-extralight">{product.name}</p>
+                  <div className="flex items-center">
+                    <FaLocationDot className="text-[8px] text-gray-400" />
+                    <p className="text-[#191919] font-light text-[10px]">
+                      {product.shop.country}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </Slider>
         <div>
           <div
