@@ -56,19 +56,16 @@ const SuggestProduct = () => {
   };
 
   useEffect(() => {
-    // Fetch data for the first page
     fetchData(currentPage);
   }, [currentPage]);
 
   const handleLoadMore = () => {
-    // Increment the current page when the "Load More" button is clicked
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
   const handleIntersection = async (entries: any) => {
     const target = entries[0];
     if (target.isIntersecting && hasMorePages && !loading) {
-      // Load more data when the bottom boundary is reached
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
@@ -101,7 +98,7 @@ const SuggestProduct = () => {
     <div className="px-44 pt-8 pb-6">
       <div className="flex justify-between pb-6">
         <h2 className="font-bold text-2xl ">Gợi Ý Cho Bạn</h2>
-        <div className="flex  text-sm font-medium">
+        <div className="flex  text-sm font-medium items-center">
           Xem tất cả
           <FaAngleDown />
         </div>
@@ -133,7 +130,7 @@ const SuggestProduct = () => {
                   {item.name}
                 </p>
               </div>
-              <div className="flex mt-5">
+              <div className="flex mt-5 items-center">
                 <FaLocationDot className="text-[8px] text-gray-400" />
                 <p className="text-[#191919] font-light text-[10px]">
                   Việt Nam

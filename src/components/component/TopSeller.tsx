@@ -9,72 +9,59 @@ import Image from "next/image";
 import { LuMoveRight } from "react-icons/lu";
 import Slider from "react-slick";
 import { TopSeller } from "@/src/model/type";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/src/store/hook";
+import { homeActions } from "@/src/store/home/homeSlice";
 
 const TopSeller = () => {
-  const [topSeller, setTopSeller] = useState<TopSeller | null>(null);
+  const dispatch = useDispatch();
 
-  const sliderRef = useRef(null);
-
-  var settings = {
-    // dots: true,
-    // infinite: true,
-    // speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
-  };
-  const btnPrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPrev();
-      // setShowNextButton(true);
-    }
-  };
-  const btnNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickNext();
-      // setShowNextButton(false);
-    }
-  };
+  const TopSeller: TopSeller = useAppSelector(
+    (state) => state.home.top_sellers
+  );
+  console.log("top seller:", TopSeller);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosClient.get<TopSeller>(
-          "api/v1/mobile/home/ranking?type=SELLER&limit=20&page=1"
-        );
-        console.log("tp", response.data);
-        setTopSeller(response.data);
-      } catch (error) {
-        console.log("Error fetching data:", error);
-        setTopSeller({
-          success: false,
-          message: "Error fetching data",
-          data: [],
-        });
-      }
-    };
-    fetchData();
+    dispatch(homeActions.getListTopSeller());
   }, []);
+
+  // const [showNextButton, setShowNextButton] = useState(true);
+  // const sliderRef = useRef(null);
+
+  // var settings = {
+  //   slidesToShow: 3,
+  //   slidesToScroll: 3,
+  // };
+  // const btnPrev = () => {
+  //   sliderRef.current.slickPrev();
+  //   setShowNextButton(true);
+  // };
+  // const btnNext = () => {
+  //   sliderRef.current.slickNext();
+  //   setShowNextButton(false);
+  // };
+
   return (
     <div className="px-44 pt-8 pb-6">
       <div>
-        <div className="flex justify-between">
+        <div className="flex justify-between ">
           <h2 className="font-bold text-2xl ">Top Người Bán</h2>
-          <div className="flex  text-sm font-medium">
+          <div className="flex  text-sm font-medium items-center">
             Xem tất cả
             <FaAngleDown />
           </div>
         </div>
         <div className="flex justify-between">
-          {topSeller?.data?.slice(0, 5).map((item) => (
+          {TopSeller?.data?.slice(0, 6).map((item) => (
             <div key={item._id} className="flex flex-col">
               <div className="relative">
                 <div className="bg-black rounded-md w-10 h-10 absolute top-[5%] left-[5%] text-white flex items-center justify-center font-medium text-2xl">
                   {item.ranking_today}
                 </div>
                 <Image
-                  src={item?.system_banner.images.en}
+                  src={item.system_banner.images.ko}
                   width={200}
                   height={200}
-                  alt={`Banner top seller`}
+                  alt={`Banner TopSeller`}
                   className="rounded-full"
                 />
               </div>
@@ -96,7 +83,8 @@ const TopSeller = () => {
         </div>
       </div>
       <div className="flex justify-between gap-6 relative px-5">
-        {topSeller?.data.slice(0, 6).map((item) => (
+        {/* <Slider {...settings} ref={sliderRef}> */}
+        {TopSeller.data?.slice(0, 6).map((item: any) => (
           <div
             key={item._id}
             className="flex items-center gap-2 w-[130px] pt-16"
@@ -112,7 +100,9 @@ const TopSeller = () => {
             <p className="line-clamp-1">{item?.name}</p>
           </div>
         ))}
-        <div
+        {/* </Slider> */}
+
+        {/* <div
           className="flex items-center justify-center w-9 h-9 absolute right-0 top-[60%] bg-white cursor-pointer rounded-full shadow-lg z-50"
           onClick={btnNext}
         >
@@ -123,7 +113,7 @@ const TopSeller = () => {
           onClick={btnPrev}
         >
           <FaArrowLeftLong />
-        </div>
+        </div> */}
       </div>
     </div>
   );

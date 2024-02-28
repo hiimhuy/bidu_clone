@@ -7,19 +7,18 @@ import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { homeActions } from "@/src/store/home/homeSlice";
 import { useAppSelector } from "@/src/store/hook";
-import { Banner, Categories } from "@/src/declares/models/home/Banners";
+import { Banner, Categories } from "@/src/declares/models/home/index";
 
 const Banner = () => {
   const Banner: Banner = useAppSelector((state) => state.home.system_banner);
   const Categories: Categories = useAppSelector(
     (state) => state.home.system_categories
   );
-  console.log("cate", Categories);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(homeActions.getList());
+    dispatch(homeActions.getListBanner());
   }, []);
 
   const [showNextButton, setShowNextButton] = useState(true);
@@ -30,29 +29,16 @@ const Banner = () => {
     slidesToScroll: 11,
   };
   const btnPrev = () => {
-    // if (sliderRef.current) {
     sliderRef.current.slickPrev();
     setShowNextButton(true);
-    // }
   };
   const btnNext = () => {
-    // if (sliderRef.current) {
     sliderRef.current.slickNext();
-    // }
     setShowNextButton(false);
   };
 
-  // if (!apiData || !apiData.data || !apiData.data.system_banner.length) {
-  //   return (
-  //     <p className="flex items-center justify-center font-semibold">
-  //       Loading...
-  //     </p>
-  //   );
-  // }
-
   return (
     <div className="px-44 flex flex-col">
-      {/* Banner */}
       <div className=" py-4 relative">
         {Banner ? (
           <Image
@@ -89,23 +75,24 @@ const Banner = () => {
       </div>
       <div className="relative pr-4">
         <Slider {...settings} ref={sliderRef}>
-          {/* {Categories.system_category.map((item) => (
-            <div
-              key={item._id}
-              className="flex flex-col justify-center items-center "
-            >
-              <div className="flex flex-col items-center justify-center h-[80px] gap-1">
-                <Image
-                  src={item.avatar}
-                  alt="avatar"
-                  width={28}
-                  height={28}
-                  priority={false}
-                />
-                <div className="font-medium text-sm">{item.name}</div>
+          {Categories &&
+            Categories?.map((item: any) => (
+              <div
+                key={item._id}
+                className="flex flex-col justify-center items-center"
+              >
+                <div className="flex flex-col items-center justify-center h-[80px] gap-1">
+                  <Image
+                    src={item.avatar}
+                    alt="avatar"
+                    width={28}
+                    height={28}
+                    priority={false}
+                  />
+                  <div className="font-medium text-sm">{item.name}</div>
+                </div>
               </div>
-            </div>
-          ))} */}
+            ))}
         </Slider>
         <div>
           {showNextButton ? (
