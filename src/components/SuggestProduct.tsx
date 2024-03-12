@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import axiosClient from "../../api/axiosClient";
+import axiosClient from "../api/axiosClient";
 import { CiBookmark } from "react-icons/ci";
 import Image from "next/image";
 import { FaAngleDown } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { SuggestProduct } from "@/src/model/type";
+import { SuggestProduct } from "@/src/models/type";
+import Link from "next/link";
 
 const SuggestProduct = () => {
   const [suggestProduct, setSuggestProduct] = useState<SuggestProduct | null>(
@@ -107,7 +108,8 @@ const SuggestProduct = () => {
       {productsInTwoRows.map((row, rowIndex) => (
         <div key={rowIndex} className="flex">
           {row.map((item) => (
-            <div
+            <Link
+              href={`/product/${item._id}`}
               key={item._id}
               className="flex flex-col w-[186px] gap-4 p-3 hover:shadow-xl hover:rounded-md"
             >
@@ -136,12 +138,11 @@ const SuggestProduct = () => {
                   Việt Nam
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       ))}
       <div ref={bottomBoundaryRef}></div>
-      {loading && <p>Loading...</p>}
       {hasMorePages && !loading && (
         <div>
           <button onClick={handleLoadMore}>Xem them</button>

@@ -1,12 +1,10 @@
 "use client";
 
-import { Provider } from "react-redux";
-import store from "@/src/store";
-import HomePage from "@/src/components/HomePage/index";
+import HomePage from "@/src/pages/HomePage/index";
 
 export default function Home() {
   return (
-    <div className="font-sans">
+    <div className="font-serif">
       <HomePage />
     </div>
   );

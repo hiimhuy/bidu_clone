@@ -1,14 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import axiosClient from "../../api/axiosClient";
-import {
-  FaAngleDown,
-  FaArrowLeftLong,
-  FaArrowRightLong,
-} from "react-icons/fa6";
+import { FaAngleDown } from "react-icons/fa6";
 import Image from "next/image";
 import { LuMoveRight } from "react-icons/lu";
-import Slider from "react-slick";
-import { TopSeller } from "@/src/model/type";
+import { TopSeller } from "@/src/models/type";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/src/store/hook";
 import { homeActions } from "@/src/store/home/homeSlice";
@@ -58,7 +52,7 @@ const TopSeller = () => {
                   {item.ranking_today}
                 </div>
                 <Image
-                  src={item.system_banner.images.ko}
+                  src={item.system_banner.images.en}
                   width={200}
                   height={200}
                   alt={`Banner TopSeller`}

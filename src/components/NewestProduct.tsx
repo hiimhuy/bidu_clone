@@ -8,11 +8,11 @@ import {
 import { BiBookmark } from "react-icons/bi";
 import Image from "next/image";
 import Slider from "react-slick";
-import axiosClient from "@/src/api/axiosClient";
 import { homeActions } from "@/src/store/home/homeSlice";
 import { useDispatch } from "react-redux";
-import { NewestProduct } from "@/src/model/type";
+import { NewestProduct } from "@/src/models/type";
 import { useAppSelector } from "@/src/store/hook";
+import Link from "next/link";
 
 const NewestProduct = () => {
   const dispatch = useDispatch();
@@ -59,12 +59,13 @@ const NewestProduct = () => {
         <Slider {...settings} ref={sliderRef}>
           {NewestProduct &&
             NewestProduct.data?.map((product) => (
-              <div
+              <Link
+                href={`/product/${product._id}`}
                 key={product._id}
                 className="flex flex-col justify-center items-center w-[162px] h-[356px] gap-2 px-3 hover:shadow-md hover:rounded-md cursor-pointer"
               >
                 <div className="relative flex flex-col w-[162px] h-[249px] gap-1">
-                  <BiBookmark className="absolute top-2 right-2 z-50 text-white text-3xl cursor-pointer" />
+                  <BiBookmark className="absolute top-2 right-2 z-10 text-white text-3xl cursor-pointer" />
                   <Image
                     src={product.images[0]}
                     alt={product.name}
@@ -85,18 +86,18 @@ const NewestProduct = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
         </Slider>
         <div>
           <div
-            className="flex items-center justify-center w-9 h-9 absolute right-0 top-[35%] bg-white cursor-pointer rounded-full shadow-lg z-50"
+            className="flex items-center justify-center w-9 h-9 absolute right-0 top-[35%] bg-white cursor-pointer rounded-full shadow-lg z-10"
             onClick={btnNext}
           >
             <FaArrowRightLong />
           </div>
           <div
-            className="flex items-center justify-center w-9 h-9 absolute left-0 top-[35%] bg-white  cursor-pointer rounded-full shadow-md z-50"
+            className="flex items-center justify-center w-9 h-9 absolute left-0 top-[35%] bg-white  cursor-pointer rounded-full shadow-md z-10"
             onClick={btnPrev}
           >
             <FaArrowLeftLong />

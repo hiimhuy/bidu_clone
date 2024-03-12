@@ -97,14 +97,14 @@ const Banner = () => {
         <div>
           {showNextButton ? (
             <div
-              className="flex items-center justify-center w-9 h-9 absolute right-0 top-[15%] bg-white  cursor-pointer rounded-full shadow-md z-50"
+              className="flex items-center justify-center w-9 h-9 absolute right-0 top-[15%] bg-white  cursor-pointer rounded-full shadow-md z-10"
               onClick={btnNext}
             >
               <FaArrowRightLong />
             </div>
           ) : (
             <div
-              className="flex items-center justify-center w-9 h-9 absolute left-0 top-[15%] bg-white  cursor-pointer rounded-full shadow-md z-50"
+              className="flex items-center justify-center w-9 h-9 absolute left-0 top-[15%] bg-white  cursor-pointer rounded-full shadow-md z-10"
               onClick={btnPrev}
             >
               <FaArrowLeftLong />

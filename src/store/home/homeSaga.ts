@@ -11,7 +11,7 @@ import {
   NewestProduct,
   TopSeller,
   SuggestProduct,
-} from "@/src/declares/models/home/index";
+} from "@/src/models/type";
 
 function* getBanners() {
   try {
