@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { LuSearch } from "react-icons/lu";
 
@@ -21,24 +22,28 @@ const Navbar = () => {
         <LuSearch className="flex items-center justify-center h-full ml-4 text-2xl" />
       </div>
       <div className="flex justify-between w-[245px]">
-        <Image
-          src={"/img_bidu/icon_home.svg"}
-          alt="home"
-          width={24}
-          height={24}
-        />
+        <Link href={"/download"}>
+          <Image
+            src={"/img_bidu/icon_home.svg"}
+            alt="home"
+            width={24}
+            height={24}
+          />
+        </Link>
         <Image
           src={"/img_bidu/icon_shopping.svg"}
           alt="home"
           width={24}
           height={24}
         />
-        <Image
-          src={"/img_bidu/icon_bidu.svg"}
-          alt="home"
-          width={24}
-          height={24}
-        />
+        <Link href={"/blog"}>
+          <Image
+            src={"/img_bidu/icon_bidu.svg"}
+            alt="home"
+            width={24}
+            height={24}
+          />
+        </Link>
         <Image
           src={"/img_bidu/icon_chat.svg"}
           alt="home"

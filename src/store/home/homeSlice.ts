@@ -3,7 +3,7 @@ import {
   SuggestProduct,
   NewestProduct,
   TopSeller,
-} from "@/src/declares/models/home/index";
+} from "@/src/models/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "..";
 

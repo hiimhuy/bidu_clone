@@ -7,16 +7,16 @@ import { IoMdClose } from "react-icons/io";
 import Navbar from "./Navbar";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenRegisterForm, setIsOpenRegisterForm] = useState(false);
+  const [isOpenSignInForm, setIsOpenSignInForm] = useState(false);
 
-  const isOpenForm = () => {
-    if (!isOpen) {
-      setIsOpen(true);
+  const handleForm = (target: string) => {
+    if (target === "register") {
+      setIsOpenRegisterForm(!isOpenRegisterForm);
+    } else if (target === "signIn") {
+      setIsOpenSignInForm(!isOpenSignInForm);
+    } else {
     }
-  };
-
-  const isCloseForm = () => {
-    setIsOpen(false);
   };
 
   return (
@@ -31,25 +31,43 @@ const Header = () => {
           <div className="flex gap-4 relative">
             <div
               className="before:border-s-[1px] before:mr-4 cursor-pointer"
-              onClick={isOpenForm}
+              onClick={() => handleForm("register")}
             >
-              {isOpen && (
+              {isOpenRegisterForm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center">
                   <div className="absolute left-0 top-0 w-screen h-screen opacity-20 bg-black"></div>
+                  <div className="flex w-[1026px] h-[628px] bg-white z-50 border-[1px] relative">
+                    <IoMdClose
+                      onClick={handleForm}
+                      className="absolute right-4 top-4 text-2xl text-black "
+                    />
+                    <div className="flex items-center justify-center p-8 cursor-default">
+                      <Image
+                        src={"/img_bidu/text_bidu.svg"}
+                        alt="image"
+                        height={185}
+                        width={277}
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center cursor-default">
+                      <h1>Đăng ký</h1>
+                      <form action="#" method="post"></form>
+                    </div>
+                  </div>
                 </div>
               )}
               Đăng ký
             </div>
             <div
               className="before:border-s-[1px] before:mr-4 cursor-pointer relative"
-              onClick={isOpenForm}
+              onClick={() => handleForm("signIn")}
             >
-              {isOpen && (
+              {isOpenSignInForm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center">
                   <div className="absolute left-0 top-0 w-screen h-screen opacity-20 bg-black"></div>
                   <div className="flex w-[800px] h-[484px] bg-white z-50 border-[1px] relative">
                     <IoMdClose
-                      onClick={isCloseForm}
+                      onClick={handleForm}
                       className="absolute right-4 top-4 text-2xl text-black "
                     />
                     <div className="flex items-center justify-center p-8 cursor-default">
