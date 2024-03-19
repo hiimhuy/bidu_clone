@@ -99,10 +99,10 @@ const SuggestProduct = () => {
     <div className="px-44 pt-8 pb-6">
       <div className="flex justify-between pb-6">
         <h2 className="font-bold text-2xl ">Gợi Ý Cho Bạn</h2>
-        <div className="flex  text-sm font-medium items-center">
+        {/* <div className="flex  text-sm font-medium items-center">
           Xem tất cả
           <FaAngleDown />
-        </div>
+        </div> */}
       </div>
 
       {productsInTwoRows.map((row, rowIndex) => (

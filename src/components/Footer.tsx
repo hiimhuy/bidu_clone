@@ -39,12 +39,14 @@ const Footer = () => {
                   src="/img_bidu/icon_ghtk.svg"
                   width={40}
                   height={30}
+                  className="w-auto h-auto"
                   alt="icon_ghtk"
                 />
                 <Image
                   src="/img_bidu/momo.svg"
                   width={30}
                   height={30}
+                  className="w-auto h-auto"
                   alt="momo"
                 />
                 <Image
@@ -54,6 +56,7 @@ const Footer = () => {
                   /img_bidu/cash_vi.svg"
                   width={40}
                   height={30}
+                  className="w-auto h-auto"
                   alt="cash_vi"
                 />
               </div>
