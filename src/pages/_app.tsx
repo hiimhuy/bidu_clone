@@ -4,7 +4,7 @@ import "tailwindcss/tailwind.css";
 export default function MyApp({ Component, pageProps }: any) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <Component {...pageProps} className='font-lexend' />
     </Layout>
   );
 }

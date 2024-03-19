@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { homeActions } from "@/src/store/home/homeSlice";
 import { useAppSelector } from "@/src/store/hook";
-import { Banner, Categories } from "@/src/declares/models/home/index";
+import { Banner, Categories } from "../models/type";
 
 const Banner = () => {
   const Banner: Banner = useAppSelector((state) => state.home.system_banner);
@@ -77,7 +77,7 @@ const Banner = () => {
         <Slider {...settings} ref={sliderRef}>
           {Categories &&
             Categories?.map((item: any) => (
-              <div
+              <Link href={`/category/${item?._id}`}
                 key={item._id}
                 className="flex flex-col justify-center items-center"
               >
@@ -91,7 +91,7 @@ const Banner = () => {
                   />
                   <div className="font-medium text-sm">{item.name}</div>
                 </div>
-              </div>
+              </Link>
             ))}
         </Slider>
         <div>
