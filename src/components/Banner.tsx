@@ -14,9 +14,8 @@ const Banner = () => {
   const Categories: Categories = useAppSelector(
     (state) => state.home.system_categories
   );
-
+console.log(Categories)
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(homeActions.getListBanner());
   }, []);
@@ -77,7 +76,9 @@ const Banner = () => {
         <Slider {...settings} ref={sliderRef}>
           {Categories &&
             Categories?.map((item: any) => (
-              <Link href={`/category/${item?._id}`}
+              <Link href={`/category/${item?.permalink}`}
+              // <Link href={`/category/${item?.permalink}`}
+            
                 key={item._id}
                 className="flex flex-col justify-center items-center"
               >
