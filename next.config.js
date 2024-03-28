@@ -14,6 +14,7 @@ const nextConfig = {
             'bidu.com.vn',
             's240-ava-talk.zadn.vn',
             'commerce.bidu.com.vn',
+            "lh3.googleusercontent.com"
           ],
         //   remotePatterns: [
         //     'https://dcvsju577z9ue.cloudfront.net/*',
