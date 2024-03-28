@@ -26,6 +26,7 @@ export interface Categories {
     _id: string;
     name: string;
     avatar: string;
+    permalink: string;
   }[];
 }
 
@@ -214,8 +215,6 @@ export interface FeedBacks {
   };
 }
 
-
-
 export interface ShopExploreResponse {
   type: string;
   order: number;
@@ -224,7 +223,7 @@ export interface ShopExploreResponse {
 export interface DetailShopUser {
   data: {
     avatar: string;
-    email:string
+    email: string;
     feedback: string;
     followCount: number;
     followingCount: number;
@@ -266,23 +265,40 @@ export interface DetailShopBanner {
   type: string;
 }
 
+export interface DetailCategory {
+  data: {
+    categories: {
+        name: string;
+        parent_id: string;
+        permalink: string;
+        _id: string;
+    }[];
+    products: {
+      data: DetailProduct[];
+      paginate: {
+        limit: number;
+        page: number;
+        total_page: number;
+        total_record: number;
+      };
+    };
+  };
+}
 
-export interface DetailCategory{
-  data:{
-    categories:{
-      name:string
-      parent_id:string
-      permalink:string
-      _id:string
-    }[]
-    products:{
-      data:DetailProduct[]
-    }
-    paginate:{
-      limit:number;
-      page:number;
-      total_page:number;
-      total_record:number;
-    }
-  }
+export interface CategoryPermalink {
+  data: {
+    avatar: string;
+    childs: [];
+    name: string;
+    name_localized: {
+      vi: string;
+      en: string;
+      ko: string;
+    };
+    pdfAvatar: string;
+    permalink: string;
+    priority: number;
+    type: string;
+    _id: string;
+  };
 }
