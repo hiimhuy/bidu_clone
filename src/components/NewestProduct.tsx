@@ -3,16 +3,13 @@ import {
   FaAngleDown,
   FaArrowLeftLong,
   FaArrowRightLong,
-  FaLocationDot,
 } from "react-icons/fa6";
-import { BiBookmark } from "react-icons/bi";
-import Image from "next/image";
 import Slider from "react-slick";
 import { homeActions } from "@/src/store/home/homeSlice";
 import { useDispatch } from "react-redux";
 import { NewestProduct } from "@/src/models/type";
 import { useAppSelector } from "@/src/store/hook";
-import Link from "next/link";
+import Product from "./Product";
 
 const NewestProduct = () => {
   const dispatch = useDispatch();
@@ -56,37 +53,10 @@ const NewestProduct = () => {
       </div>
 
       <div className="relative pt-6">
-        <Slider {...settings} ref={sliderRef}>
+        <Slider {...settings} ref={sliderRef} className="flex justify-center px-2 gap-2">
           {NewestProduct &&
             NewestProduct.data?.map((product) => (
-              <Link
-                href={`/product/${product._id}`}
-                key={product._id}
-                className="flex flex-col justify-center items-center w-[162px] h-[356px] gap-2 px-3 hover:shadow-md hover:rounded-md cursor-pointer"
-              >
-                <div className="relative flex flex-col w-[162px] h-[249px] gap-1">
-                  <BiBookmark className="absolute top-2 right-2 z-10 text-white text-3xl cursor-pointer" />
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    sizes="(width:162px), (height:249px)"
-                    className="object-cover rounded-md mt-2"
-                  />
-                </div>
-                <div className="pt-3">
-                  <p className="flex font-bold">
-                    {product.sale_price} <u className="text-xs p-[3px] ">đ</u>
-                  </p>
-                  <p className="text-sm font-extralight">{product.name}</p>
-                  <div className="flex items-center">
-                    <FaLocationDot className="text-[8px] text-gray-400" />
-                    <p className="text-[#191919] font-light text-[10px]">
-                      {product.shop.country}
-                    </p>
-                  </div>
-                </div>
-              </Link>
+             <Product product={product} key={product._id} />
             ))}
         </Slider>
         <div>

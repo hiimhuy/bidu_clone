@@ -8,7 +8,6 @@ interface LoginProps {
   isOpenSignInForm: boolean;
   onCloseSignInForm: () => void;
   onOpenRegisterForm :()=>void
-  
 }
 
 const Login: React.FC<LoginProps> = ({ isOpenSignInForm, onCloseSignInForm, onOpenRegisterForm }) => {
@@ -45,13 +44,6 @@ const Login: React.FC<LoginProps> = ({ isOpenSignInForm, onCloseSignInForm, onOp
     e.preventDefault();
     signInWithEmail(formData.email, formData.password);
   };
-
-  const handleOpenRegisterForm = () => {
-    onOpenRegisterForm
-    onCloseSignInForm
-  };
-  
- 
 
   return (
     <>

@@ -17,11 +17,6 @@ const Header = () => {
   const [userDropDown, setUserDropDown] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
   const auth = getAuth();
   const cookies = new Cookies();
 
@@ -119,7 +114,6 @@ const Header = () => {
                 onCloseRegisterForm={() => setIsOpenRegisterForm(false)}
                 onOpenLoginForm={handleOpenLoginForm}
               />{" "}
-              {/* Truyền hàm xử lý mở form đăng nhập */}
               <div
                 className="before:border-s-[1px] before:mr-4 cursor-pointer relative"
                 onClick={() => handleForm("signIn")}

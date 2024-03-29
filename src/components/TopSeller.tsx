@@ -77,7 +77,7 @@ const TopSeller = () => {
                 height={56}
                 alt="avatar"
                 loading="lazy"
-                className="rounded-full h-[56px] w-[56px]"
+                className="rounded-full object-cover h-[56px] w-[56px]"
               />
               <p className="line-clamp-1">{item?.name}</p>
             </div>

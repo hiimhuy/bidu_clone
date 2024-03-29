@@ -90,7 +90,7 @@ console.log(Categories)
                     height={28}
                     priority={false}
                   />
-                  <div className="font-medium text-sm">{item.name}</div>
+                  <div className="font-semibold text-sm">{item.name}</div>
                 </div>
               </Link>
             ))}

@@ -13,6 +13,7 @@ import {
   FaLocationDot,
 } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
+import Product from "@/src/components/Product";
 
 const Category = () => {
   const [data, setData] = useState<DetailCategory | null>(null);
@@ -263,39 +264,9 @@ const Category = () => {
           </div>
           <div className="col-span-9 bg-white">
            <div className="bg-gray-100 rounded-xl">
-              <div className="grid grid-cols-4 bg-gray-100 rounded-xl p-5 gap-3 place-items-center">
-                {data?.data.products.data.map((item: any) => (
-                  <Link
-                    href={`/product/${item._id}`}
-                    key={item._id}
-                    className="flex flex-col w-[186px] bg-white rounded-md gap-2 p-3 hover:shadow-xl hover:rounded-md"
-                  >
-                    <div className="w-[162px] h-[249px] relative">
-                      <CiBookmark className="absolute top-0 left-0 text-white" />
-                      <Image
-                        src={item.images[0]}
-                        fill
-                        sizes="(width:162px), (min-height:249px)"
-                        alt={item.name}
-                        priority
-                        className="object-cover rounded-md"
-                      />
-                    </div>
-                    <div className="pt-1">
-                      <p className="flex font-bold">
-                        {item.sale_price} <u className="text-xs p-[3px]">đ</u>
-                      </p>
-                      <p className="mt-2 line-clamp-1 text-sm font-light">
-                        {item.name}
-                      </p>
-                    </div>
-                    <div className="flex mt-3 items-center">
-                      <FaLocationDot className="text-[8px] text-gray-400" />
-                      <p className="text-[#191919] font-light text-[10px]">
-                        Việt Nam
-                      </p>
-                    </div>
-                  </Link>
+              <div className="grid grid-cols-4 bg-gray-100 rounded-xl py-3 px-2 gap-2 place-items-center">
+                {data?.data.products.data.map((product: any) => (
+                 <Product key={product._id} product={product} />
                 ))}
               </div>
               {/* Pagination */}
