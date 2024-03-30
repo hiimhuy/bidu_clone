@@ -29,29 +29,40 @@ const Register: React.FC<RegisterProps> = ({
 
   const auth = getAuth();
 
-  const register = (fullname:string,email: string, password: string, repassword:string, tel:string) => {
+  const register = (
+    fullname: string,
+    email: string,
+    password: string,
+    repassword: string,
+    tel: string
+  ) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         <div>Đăng ký thành công</div>;
-        alert("Đăng ký thành công")
-        console.log("Đăng ký thành công",userCredential.user)
+        alert("Đăng ký thành công");
+        console.log("Đăng ký thành công", userCredential.user);
       })
       .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          // Địa chỉ email đã được sử dụng
-          console.error("Địa chỉ email đã được sử dụng");
-          // Hiển thị thông báo cho người dùng
-          alert("Địa chỉ email đã được sử dụng. Vui lòng sử dụng địa chỉ email khác.");
+        if (error.code === "auth/email-already-in-use") {
+          alert(
+            "Địa chỉ email đã được sử dụng. Vui lòng sử dụng địa chỉ email khác."
+          );
         } else {
-          // Xử lý các lỗi khác
           console.error("Đăng ký thất bại", error);
+          alert("Đăng ký thất bại!");
         }
       });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    register(formData.fullname,formData.email, formData.password,formData.repassword,formData.tel);
+    register(
+      formData.fullname,
+      formData.email,
+      formData.password,
+      formData.repassword,
+      formData.tel
+    );
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,10 +75,6 @@ const Register: React.FC<RegisterProps> = ({
   useEffect(() => {
     setShowRegisterForm(isOpenRegisterForm);
   }, [isOpenRegisterForm]);
-
-  // const handleCloseRegisterForm = () => {
-  //   setShowRegisterForm(false);
-  // };
 
   if (!showRegisterForm) return null;
 
